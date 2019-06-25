@@ -1,4 +1,4 @@
-package com.melardev.spring.jwtoauth.config;
+package com.melardev.spring.jwtoauth.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

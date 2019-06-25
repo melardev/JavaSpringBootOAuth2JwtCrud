@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -59,11 +60,13 @@ public class TodosController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER') and #oauth2.hasScope('write')")
     public ResponseEntity<Todo> create(@Valid @RequestBody Todo todo) {
         return new ResponseEntity<>(todosRepository.save(todo), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') and #oauth2.hasScope('write')")
     public ResponseEntity update(@PathVariable("id") Long id,
                                  @RequestBody Todo todoInput) {
         Optional<Todo> optionalTodo = todosRepository.findById(id);
@@ -84,6 +87,7 @@ public class TodosController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') and #oauth2.hasScope('write')")
     public ResponseEntity delete(@PathVariable("id") Long id) {
         Optional<Todo> todo = todosRepository.findById(id);
         if (todo.isPresent()) {
@@ -95,6 +99,7 @@ public class TodosController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN') and #oauth2.hasScope('write')")
     public ResponseEntity deleteAll() {
         todosRepository.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

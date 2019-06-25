@@ -1,6 +1,6 @@
 -- The Schema reference is at:
 -- https://github.com/spring-projects/spring-security-oauth/blob/master/spring-security-oauth2/src/test/resources/schema.sql
-
+-- If using MySQL you would need to create the schema and USE it
 CREATE TABLE IF NOT EXISTS oauth_client_details
 (
     client_id               VARCHAR(256) PRIMARY KEY,

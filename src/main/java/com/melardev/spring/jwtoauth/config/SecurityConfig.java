@@ -1,5 +1,7 @@
 package com.melardev.spring.jwtoauth.config;
 
+import com.melardev.spring.jwtoauth.security.OAuthAccessDeniedHandler;
+import com.melardev.spring.jwtoauth.security.OAuthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
